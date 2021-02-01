@@ -65,7 +65,7 @@ function staticServer(root) {
 						if (projectPath !== symlinkPath){
 							console.log("403 Forbidden");
 							res.statusCode = 403;
-							res.end("403 Forbidden");
+							res.end("403 Forbidden!");
 						}
 					})
 				}
