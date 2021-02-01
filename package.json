@@ -38,7 +38,7 @@
     "test": "mocha test --exit && npm run lint"
   },
   "bin": {
-    "live-server": "live-server.js"
+    "live-server": "./live-server.js"
   },
   "repository": {
     "type": "git",
