@@ -55,6 +55,21 @@ function staticServer(root) {
 		function file(filepath /*, stat*/) {
 			var x = path.extname(filepath).toLocaleLowerCase(), match,
 					possibleExtensions = [ "", ".html", ".htm", ".xhtml", ".php", ".svg" ];
+			var filename = filepath.split('/');
+			filename = filename[filename.length - 1];
+			fs.lstat(filename, function(err, stats){
+				if (stats.isSymbolicLink()){
+					fs.readlink(filename, function(err, symlinkTo){
+						var projectPath = path.dirname(require.main.filename);
+						var symlinkPath = path.dirname(symlinkTo);
+						if (projectPath !== symlinkPath){
+							console.log("403 Forbidden");
+							res.statusCode = 403;
+							res.end("403 Forbidden!");
+						};
+					});
+				};
+			});
 			if (hasNoOrigin && (possibleExtensions.indexOf(x) > -1)) {
 				// TODO: Sync file read here is not nice, but we need to determine if the html should be injected or not
 				var contents = fs.readFileSync(filepath, "utf8");
