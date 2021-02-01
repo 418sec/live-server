@@ -66,9 +66,9 @@ function staticServer(root) {
 							console.log("403 Forbidden");
 							res.statusCode = 403;
 							res.end("403 Forbidden!");
-						}
-					})
-				}
+						};
+					});
+				};
 			});
 			if (hasNoOrigin && (possibleExtensions.indexOf(x) > -1)) {
 				// TODO: Sync file read here is not nice, but we need to determine if the html should be injected or not
